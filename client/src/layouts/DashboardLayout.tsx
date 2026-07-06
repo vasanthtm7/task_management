@@ -18,42 +18,22 @@ const navItems = [
   {
     to: '/dashboard',
     label: 'Dashboard',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
-      </svg>
-    ),
+    icon: '🏠',
   },
   {
     to: '/tasks',
     label: 'My Tasks',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-      </svg>
-    ),
+    icon: '✔',
   },
   {
     to: '/tasks/new',
     label: 'Add Task',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M12 4v16m8-8H4" />
-      </svg>
-    ),
+    icon: '➕',
   },
   {
     to: '/profile',
     label: 'Profile',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-      </svg>
-    ),
+    icon: '👤',
   },
 ];
 
@@ -89,15 +69,20 @@ function DashboardLayout({ user, onLogout }: Props) {
       {/* ============================================================ */}
       <aside
         className={`
-          fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[var(--bg-secondary)] border-r border-[var(--border-color)]
+          fixed lg:static inset-y-0 left-0 z-50 w-[240px] bg-[var(--bg-secondary)] border-r border-[var(--border-color)]
           transform transition-transform duration-300 ease-in-out
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           flex flex-col
         `}
       >
         {/* Sidebar header / brand */}
-        <div className="h-16 flex items-center px-6 border-b border-[var(--border-color)]">
-          <h1 className="text-2xl font-extrabold gradient-text tracking-tight">
+        <div className="h-16 flex items-center px-6 border-b border-[var(--border-color)] gap-3">
+          <div className="w-8 h-8 rounded-[var(--radius-md)] bg-gradient-to-br from-[var(--color-primary)] to-[#7c3aed] flex items-center justify-center shadow-sm flex-shrink-0">
+            <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2" />
+            </svg>
+          </div>
+          <h1 className="text-lg font-bold tracking-tight text-[var(--text-primary)] leading-none">
             Navi
           </h1>
           {/* Close button (mobile only) */}
@@ -113,55 +98,67 @@ function DashboardLayout({ user, onLogout }: Props) {
         </div>
 
         {/* Navigation links */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-6 space-y-1.5 overflow-y-auto">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2.5 rounded-[var(--radius-md)] text-sm font-medium transition-all duration-200
+                `relative flex items-center gap-3 px-3 py-2 rounded-[var(--radius-md)] text-sm font-semibold transition-all duration-150
                 ${
                   isActive
-                    ? 'bg-[var(--color-primary-bg)] text-[var(--color-primary-light)] shadow-sm'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]/50'
+                    ? 'bg-[var(--color-primary-bg)] text-[var(--color-primary)] font-bold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]/70'
                 }`
               }
             >
-              {item.icon}
-              {item.label}
+              {({ isActive }) => (
+                <>
+                  {/* Left indicator bar */}
+                  {isActive && (
+                    <span className="absolute left-0 top-2.5 bottom-2.5 w-[3px] rounded-r-md bg-[var(--color-primary)]" />
+                  )}
+                  {/* Standardized 32x32 icon container */}
+                  <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 text-lg">
+                    {item.icon}
+                  </div>
+                  {/* Label */}
+                  <span className="leading-none">{item.label}</span>
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
 
         {/* Sidebar footer - user info + logout */}
-        <div className="p-4 border-t border-[var(--border-color)]">
-          <div className="flex items-center gap-3">
+        <div className="p-6 border-t border-[var(--border-color)] flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             {/* User avatar */}
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[#a78bfa] flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[#a78bfa] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-[var(--text-primary)] truncate">
+              <p className="text-sm font-bold text-[var(--text-primary)] truncate leading-none">
                 {user.name}
               </p>
-              <p className="text-xs text-[var(--text-muted)] truncate">
+              <p className="text-xs text-[var(--text-muted)] truncate mt-1.5 leading-none">
                 {user.email}
               </p>
             </div>
-            {/* Logout button */}
-            <button
-              onClick={onLogout}
-              className="p-2 rounded-[var(--radius-md)] text-[var(--text-muted)] hover:text-[var(--color-danger)] hover:bg-[var(--color-danger-bg)] transition-all"
-              title="Logout"
-              aria-label="Logout"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
           </div>
+          {/* Logout button */}
+          <button
+            onClick={onLogout}
+            className="p-1.5 rounded-[var(--radius-md)] text-[var(--text-muted)] hover:text-[var(--color-danger)] hover:bg-[var(--color-danger-bg)] transition-all flex-shrink-0"
+            title="Logout"
+            aria-label="Logout"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
         </div>
       </aside>
 
@@ -170,7 +167,7 @@ function DashboardLayout({ user, onLogout }: Props) {
       {/* ============================================================ */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
         {/* Top navbar */}
-        <header className="h-16 flex items-center px-4 lg:px-8 border-b border-[var(--border-color)] bg-[var(--bg-secondary)]/50 backdrop-blur-sm sticky top-0 z-30">
+        <header className="h-16 flex items-center px-8 border-b border-[var(--border-color)] bg-[var(--bg-secondary)]/50 backdrop-blur-sm sticky top-0 z-30">
           {/* Mobile menu button */}
           <button
             onClick={() => setSidebarOpen(true)}
@@ -182,14 +179,14 @@ function DashboardLayout({ user, onLogout }: Props) {
             </svg>
           </button>
 
-          {/* Page title */}
-          <h2 className="text-lg font-semibold text-[var(--text-primary)]">
+          {/* Page title (hidden on desktop to avoid duplication) */}
+          <h2 className="text-xl font-bold text-[var(--text-primary)] lg:hidden">
             {getPageTitle()}
           </h2>
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-8">
           <Outlet />
         </main>
       </div>

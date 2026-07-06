@@ -69,7 +69,7 @@ SELECT
   task.title,
   task.description,
   task.status,
-  task.due_date
+  task.due_date::DATE
 FROM users u
 CROSS JOIN (
   VALUES

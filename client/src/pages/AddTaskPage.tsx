@@ -15,7 +15,7 @@ function AddTaskPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (data: { title: string; description?: string; status?: Task['status']; due_date?: string }) => {
+  const handleSubmit = async (data: { title: string; description?: string | null; status?: Task['status']; due_date?: string | null }) => {
     setLoading(true);
     setError('');
     try {

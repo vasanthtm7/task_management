@@ -31,7 +31,7 @@ router.post(
       .isIn(['Todo', 'In Progress', 'Completed'])
       .withMessage('Status must be: Todo, In Progress, or Completed'),
     body('due_date')
-      .optional()
+      .optional({ nullable: true })
       .isISO8601()
       .withMessage('Due date must be a valid date'),
   ],

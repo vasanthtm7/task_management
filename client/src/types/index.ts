@@ -44,15 +44,15 @@ export interface Task {
 /** Data for creating a new task */
 export interface CreateTaskInput {
   title: string;
-  description?: string;
+  description?: string | null;
   status?: TaskStatus;
-  due_date?: string;
+  due_date?: string | null;
 }
 
 /** Data for updating a task (all fields optional) */
 export interface UpdateTaskInput {
   title?: string;
-  description?: string;
+  description?: string | null;
   status?: TaskStatus;
   due_date?: string | null;
 }

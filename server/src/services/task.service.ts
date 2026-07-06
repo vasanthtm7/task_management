@@ -48,7 +48,8 @@ export const updateTask = async (
 
   const updatedTask = await TaskRepository.updateTask(taskId, userId, data);
   if (!updatedTask) {
-    throw new Error('Failed to update task.');
+    // If no columns were updated (e.g. no change requested), return the existing task
+    return existingTask;
   }
   return updatedTask;
 };

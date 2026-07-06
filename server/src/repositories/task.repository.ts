@@ -31,7 +31,7 @@ export interface CreateTaskData {
  */
 export interface UpdateTaskData {
   title?: string;
-  description?: string;
+  description?: string | null;
   status?: 'Todo' | 'In Progress' | 'Completed';
   due_date?: string | null;
 }

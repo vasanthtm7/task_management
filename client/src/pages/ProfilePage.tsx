@@ -43,7 +43,7 @@ function ProfilePage({ user, onUserUpdate }: Props) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+    <div className="max-w-2xl mx-auto space-y-8 animate-fade-in">
       {message && (
         <AlertMessage
           type={message.type}
@@ -52,13 +52,22 @@ function ProfilePage({ user, onUserUpdate }: Props) {
         />
       )}
 
+      <div>
+        <h1 className="text-[32px] font-extrabold tracking-tight text-[var(--text-primary)]">
+          Profile Settings
+        </h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
+          Manage your personal information and account settings.
+        </p>
+      </div>
+
       {/* ============================================================ */}
       {/* Profile Card */}
       {/* ============================================================ */}
-      <div className="glass-card p-6">
+      <div className="bg-white border border-[var(--border-color)] p-8 rounded-[16px] shadow-sm">
         <div className="flex items-center gap-4 mb-6">
           {/* Avatar */}
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[#a78bfa] flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-lg">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[#a78bfa] flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-sm">
             {user.name.charAt(0).toUpperCase()}
           </div>
           <div>
@@ -90,8 +99,8 @@ function ProfilePage({ user, onUserUpdate }: Props) {
       {/* ============================================================ */}
       {/* Update Name Form */}
       {/* ============================================================ */}
-      <div className="glass-card p-6">
-        <h3 className="text-sm font-semibold text-[var(--text-primary)] mb-4">Update Name</h3>
+      <div className="bg-white border border-[var(--border-color)] p-8 rounded-[16px] shadow-sm">
+        <h3 className="text-[18px] font-bold text-[var(--text-primary)] mb-4">Update Name</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="profile-name" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">

@@ -31,7 +31,7 @@ function AuthLayout() {
         </div>
 
         {/* Page content (Login or Register form) */}
-        <div className="glass-card p-8 shadow-lg">
+        <div className="bg-white border border-[var(--border-color)] p-8 rounded-[16px] shadow-lg">
           <Outlet />
         </div>
       </div>

@@ -10,7 +10,7 @@ interface Props {
   /** Existing task data when editing (null for create) */
   initialData?: Task | null;
   /** Called when the form is submitted */
-  onSubmit: (data: { title: string; description?: string; status?: TaskStatus; due_date?: string }) => Promise<void>;
+  onSubmit: (data: { title: string; description?: string | null; status?: TaskStatus; due_date?: string | null }) => Promise<void>;
   /** Loading state for the submit button */
   loading: boolean;
   /** The form title */
@@ -58,9 +58,9 @@ function TaskForm({ initialData, onSubmit, loading, title }: Props) {
 
     await onSubmit({
       title: formData.title.trim(),
-      description: formData.description.trim() || undefined,
+      description: formData.description.trim() || null,
       status: formData.status,
-      due_date: formData.due_date || undefined,
+      due_date: formData.due_date || null,
     });
   };
 
@@ -78,9 +78,16 @@ function TaskForm({ initialData, onSubmit, loading, title }: Props) {
 
   return (
     <div className="max-w-2xl mx-auto animate-fade-in">
-      <h2 className="text-xl font-bold text-[var(--text-primary)] mb-6">{title}</h2>
+      <div className="mb-8">
+        <h1 className="text-[32px] font-extrabold tracking-tight text-[var(--text-primary)]">
+          {title}
+        </h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
+          {initialData ? 'Update details for this task.' : 'Create a new item in your workspace.'}
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="glass-card p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-white border border-[var(--border-color)] p-8 rounded-[16px] space-y-6 shadow-sm">
         {/* Title field */}
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">

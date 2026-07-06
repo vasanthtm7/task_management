@@ -34,7 +34,7 @@ function EditTaskPage() {
     fetchTask();
   }, [id]);
 
-  const handleSubmit = async (data: { title: string; description?: string; status?: Task['status']; due_date?: string }) => {
+  const handleSubmit = async (data: { title: string; description?: string | null; status?: Task['status']; due_date?: string | null }) => {
     setSaving(true);
     setError('');
     try {
@@ -54,7 +54,7 @@ function EditTaskPage() {
 
   if (!task && !loading) {
     return (
-      <div className="glass-card p-12 text-center animate-fade-in">
+      <div className="bg-white border border-[var(--border-color)] p-12 text-center rounded-[16px] shadow-sm animate-fade-in">
         <p className="text-[var(--text-secondary)]">Task not found</p>
       </div>
     );

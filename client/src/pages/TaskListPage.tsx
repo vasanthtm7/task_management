@@ -70,7 +70,7 @@ function TaskListPage() {
   if (loading) return <LoadingSpinner message="Loading tasks..." />;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-8 animate-fade-in">
       {message && (
         <AlertMessage
           type={message.type}
@@ -78,6 +78,15 @@ function TaskListPage() {
           onClose={() => setMessage(null)}
         />
       )}
+
+      <div>
+        <h1 className="text-[32px] font-extrabold tracking-tight text-[var(--text-primary)]">
+          My Tasks
+        </h1>
+        <p className="text-sm text-[var(--text-secondary)] mt-1">
+          Manage and track your individual workspace tasks.
+        </p>
+      </div>
 
       {/* ============================================================ */}
       {/* Header with filter & add button */}
@@ -136,7 +145,7 @@ function TaskListPage() {
           ))}
         </div>
       ) : (
-        <div className="glass-card p-12 text-center">
+        <div className="bg-white border border-[var(--border-color)] p-12 text-center rounded-[16px] shadow-sm">
           <svg className="w-12 h-12 mx-auto text-[var(--text-muted)] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
