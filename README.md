@@ -60,7 +60,7 @@ Ensure you have the following installed:
    ```sql
    CREATE DATABASE taskmanager;
    ```
-3. Connect to the newly created database and run the script inside [schema.sql](file:///c:/Users/Vasanth/OneDrive/Desktop/navi/database/schema.sql) to set up tables index setups and seed some mock data:
+3. Connect to the newly created database and run the script inside [schema.sql](./database/schema.sql) to set up tables, index setups, and seed some mock data:
    ```bash
    psql -U postgres -d taskmanager -f database/schema.sql
    ```
